@@ -1,13 +1,13 @@
 #!/bin/bash
 ################################################################################
-# Script for Installing: ODOO 8 or 9 Community/Enterprise on Ubuntu 14.04
+# Script for Installing: ODOO 8 or 9 Community/Enterprise on Ubuntu 14.04 & 16.04
 # Author: Gustavo Valverde, iterativo.do 2016
 #
 # Based on André Schenkels installation script located in github:
 # https://github.com/aschenkels-ictstudio/odoo-install-scripts
 #-------------------------------------------------------------------------------
 # This script will install ODOO Server on a
-# clean Ubuntu 14.04 Server
+# clean Ubuntu 14.04 / 16.04 Server
 #-------------------------------------------------------------------------------
 # PREFERRED USE:
 # . odoo_install or source odoo_install
@@ -39,7 +39,7 @@ sudo update-locale LANG=en_US.UTF-8
 # Timezone for Dominican Republic, change as needed
 #---------------------------------------------------
 echo -e "\n---- Setting Time Zone  ----"
-echo "America/Santo_Domingo" > /etc/timezone && \
+echo "Europe/Paris" > /etc/timezone && \
 sudo dpkg-reconfigure -f noninteractive tzdata && \
 
 #--------------------------------------------------
@@ -65,6 +65,9 @@ OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
 OE_VIRTENV="venv"
 
 #Set it to true if you want to install it, false if you don't need it or have it already installed.
+INSTALL_CLOUDER="True"
+
+#Set it to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 
 #Set it to true if you have your Odoo install behind a Proxy.
@@ -74,13 +77,13 @@ HAVE_PROXY="False"
 OE_PORT="8069"
 
 #Choose the Odoo version which you want to install. For example: 9.0, 8.0.
-OE_VERSION="9.0"
+OE_VERSION="8.0"
 
 # Set this to True if you want to install Odoo 9 Enterprise!
 IS_ENTERPRISE="False"
 
 #set the superadmin password
-OE_SUPERADMIN="admin"
+OE_SUPERADMIN="admin-OE2017"
 OE_CONFIG="${OE_USER}-server"
 
 ###  WKHTMLTOPDF download links
@@ -207,7 +210,7 @@ echo -e "\n---- Install Odoo python dependencies in requirements.txt ----"
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
 
 echo -e "\n---- Install additional python dependencies ----"
-# This is for compatibility with Ubuntu 16.04. Will work on 14.04 and 15.04
+# This is for compatibility with Ubuntu 16.04. Will work on 14.04
 $OE_HOME_EXT/$OE_VIRTENV/bin/pip install suds
 
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
