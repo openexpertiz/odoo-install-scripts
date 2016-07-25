@@ -1,24 +1,13 @@
 #!/bin/bash
 ################################################################################
-# Script for Installing: ODOO 8 or 9 Community/Enterprise on Ubuntu 14.04 & 16.04
-# Author: Gustavo Valverde, iterativo.do 2016
-#
-# Based on André Schenkels installation script located in github:
-# https://github.com/aschenkels-ictstudio/odoo-install-scripts
-#-------------------------------------------------------------------------------
-# This script will install ODOO Server on a
-# clean Ubuntu 14.04 / 16.04 Server
+# Script for installing Odoo and Clouder on a clean Ubuntu 14.04 or 16.04 server
+# Author: Amaury
 #-------------------------------------------------------------------------------
 # PREFERRED USE:
-# . odoo_install or source odoo_install
+# . odoo-clouder-install or source odoo-clouder-install
 #
-# CAN WORK WITH (NOT RECOMMENDED AS VIRTUALENV MITH NOT WORK CORRECTLY):
-# ./odoo-install
-#
-#-------------------------------------------------------------------------------
-# IMPORTANT! This script contains extra libraries that are specifically
-# needed for Odoo 9.0
-#-------------------------------------------------------------------------------
+# CAN WORK WITH (NOT RECOMMENDED AS VIRTUALENV MIGHT NOT WORK CORRECTLY):
+# ./odoo-clouder-install
 #
 ################################################################################
 #--------------------------------------------------
@@ -121,7 +110,7 @@ echo "*    Installing Dependencies    *"
 echo "*                               *"
 echo "*********************************"
 echo -e "\n---- Install dependencies for Odoo install and management ----"
-sudo apt-get -y install wget curl git python-pip gdebi-core unzip
+sudo apt-get -y install wget curl git python-pip gdebi-core unzip supervisor
 sudo apt-get -y install build-essential libldap2-dev libsasl2-dev libxml2-dev libxslt-dev libevent-dev libjpeg-dev libjpeg8-dev libtiff5-dev
 
 echo -e "\n---- Install build dependencies for Python 2.7.9 ----"
