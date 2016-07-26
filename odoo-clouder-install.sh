@@ -439,3 +439,15 @@ echo "Start Odoo service: sudo service $OE_CONFIG start"
 echo "Stop Odoo service: sudo service $OE_CONFIG stop"
 echo "Restart Odoo service: sudo service $OE_CONFIG restart"
 echo "-----------------------------------------------------------"
+
+echo "***********************************************************"
+echo "*                                                         *"
+echo "* necessary libraries for a proper clouder installation   *"
+echo "*                                                         *"
+
+echo "***********************************************************"
+sudo pip install simplejson lxml pytz psycopg2 werkzeug pyyaml mako platypus unittest2 reportlab decorator pillow requests 
+jinja2 pyPdf passlib psutil
+
+apt-get installations:
+sudo apt-get install python-dateutil python-pychart python-decorator python-docutils python-passlib python-openid python-babel
