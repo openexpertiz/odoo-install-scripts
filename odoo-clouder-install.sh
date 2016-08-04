@@ -178,7 +178,7 @@ else
     sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
 fi
 
-echo -e "\n---- Create custom module directory ----"
+echo -e "\n---- Create community module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community/addons-{available,enabled}"
 sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-available"
@@ -248,9 +248,9 @@ sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/${OE_CONFIG}.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/${OE_CONFIG}.conf
 sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/${OE_CONFIG}.conf"
 if [  $IS_ENTERPRISE = "True" ]; then
-    sudo su root -c "echo 'addons_path=$OE_HOME/enterprise/addons,$OE_HOME_EXT/addons' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "echo 'addons_path=$OE_HOME/enterprise/addons,$OE_HOME/odoo_community/addons-enabled,$OE_HOME_EXT/addons' >> /etc/${OE_CONFIG}.conf"
 else
-    sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/odoo_community/addons-enabled' >> /etc/${OE_CONFIG}.conf"
 fi
 
 echo -e "* Change default xmlrpc port"
