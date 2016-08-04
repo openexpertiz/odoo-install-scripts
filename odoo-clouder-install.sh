@@ -196,11 +196,11 @@ sudo virtualenv --python=/usr/local/lib/python2.7.9/bin/python $OE_VIRTENV
 source $OE_HOME_EXT/$OE_VIRTENV/bin/activate
 
 echo -e "\n---- Install Odoo python dependencies in requirements.txt ----"
-$OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
+sudo $OE_HOME_EXT/$OE_VIRTENV/bin/pip install -r $OE_HOME_EXT/requirements.txt
 
 echo -e "\n---- Install additional python dependencies ----"
 # This is for compatibility with Ubuntu 16.04. Will work on 14.04
-$OE_HOME_EXT/$OE_VIRTENV/bin/pip install suds
+sudo $OE_HOME_EXT/$OE_VIRTENV/bin/pip install suds
 
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -261,7 +261,7 @@ fi
 # Startup File
 #--------------------------------------------------
 echo -e "* Create startup file"
-sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
+sudo su root -c "echo '#! /bin/sh' >> $OE_HOME_EXT/start.sh"
 sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/openerp-server --config=/etc/${OE_CONFIG}.conf' >> $OE_HOME_EXT/start.sh"
 sudo chmod 755 $OE_HOME_EXT/start.sh
 
@@ -270,7 +270,7 @@ sudo chmod 755 $OE_HOME_EXT/start.sh
 # Install additional Packages for Odoo
 #--------------------------------------------------
 echo -e "\n--- Install Less CSS via nodejs and npm"
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
+sudo curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
 sudo apt-get -y install npm nodejs
 sudo npm install -g npm
 sudo ln -s /usr/bin/nodejs /usr/bin/node
@@ -439,3 +439,12 @@ echo "Start Odoo service: sudo service $OE_CONFIG start"
 echo "Stop Odoo service: sudo service $OE_CONFIG stop"
 echo "Restart Odoo service: sudo service $OE_CONFIG restart"
 echo "-----------------------------------------------------------"
+
+echo "************************************"
+echo "*                                  *"
+echo "* Clouder installation Libraries   *"
+echo "*                                  *"
+echo "************************************"
+sudo pip install simplejson lxml pytz psycopg2 werkzeug pyyaml mako platypus unittest2 reportlab decorator pillow requests 
+sudo pip install jinja2 pyPdf passlib psutil
+sudo apt-get install python-dateutil python-pychart python-decorator python-docutils python-passlib python-openid python-babel
