@@ -18,7 +18,7 @@ It also follows the approach recommended in Odoo's documentation (https://www.od
   ```bash
     OE_USER="odoo"
     OE_VIRTENV="venv"
-    OE_SUPERADMIN="admin-oe2017"
+    OE_SUPERADMIN="admin-OE2017"
   ```
 
 3.  Modify this variables based on your needs
