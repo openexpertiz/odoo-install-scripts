@@ -178,6 +178,17 @@ else
     sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
 fi
 
+echo -e "\n---- Create custom module directory ----"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community/addons-{available,enabled}"
+sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-available"
+sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/server-tools.git"
+sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/connector.git"
+sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-enabled"
+sudo su $OE_USER -c "ln -s ../addons-available/server-tools/disable_openerp_online/"
+sudo su $OE_USER -c "ln -s ../addons-available/server-tools/cron_run_manually/"
+sudo su $OE_USER -c "ln -s ../addons-available/connector/"
+
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
