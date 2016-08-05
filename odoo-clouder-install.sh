@@ -194,7 +194,7 @@ sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-enabled"
 sudo su $OE_USER -c "ln -s ../addons-available/server-tools/disable_openerp_online/"
 sudo su $OE_USER -c "ln -s ../addons-available/server-tools/cron_run_manually/"
 # sudo su $OE_USER -c "ln -s ../addons-available/nicolas-petit/form_recette/clouder/"
-sudo su $OE_USER -c "ln -s ../addons-available/clouder-community/8.1/clouder/"
+sudo su $OE_USER -c "ln -s ../addons-available/clouder-community/8.1/clouder/clouder*"
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
