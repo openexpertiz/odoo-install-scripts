@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################################################################
 # Script for installing Odoo and Clouder on a clean Ubuntu 14.04 or 16.04 server
-# Authors: Amaury, Insaf
+# Authors: Amaury, Insaf, teoshore.com 2016, Gustavo Valverde, iterativo.do 2016
 #-------------------------------------------------------------------------------
 # PREFERRED USE:
 # . odoo-clouder-install or source odoo-clouder-install
@@ -458,9 +458,14 @@ echo "-----------------------------------------------------------"
 
 echo "************************************"
 echo "*                                  *"
-echo "* Clouder installation Libraries   *"
+echo "*         Clouder Libraries        *"
 echo "*                                  *"
 echo "************************************"
+echo -e "\n---- Install required libraries for Clouder ----"
 sudo pip install simplejson lxml pytz psycopg2 werkzeug pyyaml mako platypus unittest2 reportlab decorator pillow requests 
 sudo pip install jinja2 pyPdf passlib psutil
 sudo apt-get install python-dateutil python-pychart python-decorator python-docutils python-passlib python-openid python-babel
+
+echo -e "\n---- Install and Upgrade paramiko and erppeek ----"
+sudo pip install --upgrade paramiko
+sudo pip install --upgrade erppeek
