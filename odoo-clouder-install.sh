@@ -179,22 +179,21 @@ else
 fi
 
 echo -e "\n---- Create community module directory ----"
-sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community"
-sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community/addons-{available,enabled}"
-sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-available"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-{available,enabled}"
+sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available"
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/server-tools.git"
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/connector.git"
-# sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community/addons-available/nicolas-petit/form-recette"
-# sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-available/nicolas-petit/form_recette"
-# sudo su $OE_USER -c "git clone --depth 1 --branch form_recette --single-branch https://github.com/nicolas-petit/clouder.git"
-sudo su $OE_USER -c "mkdir $OE_HOME/odoo_community/addons-available/clouder-community/8.1"
-sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-available/clouder-community/8.1"
-sudo su $OE_USER -c "git clone --depth 1 --branch 8.1 --single-branch https://github.com/clouder-community/clouder.git"
-sudo su $OE_USER -c "cd $OE_HOME/odoo_community/addons-enabled"
-sudo su $OE_USER -c "ln -s ../addons-available/server-tools/disable_openerp_online/"
-sudo su $OE_USER -c "ln -s ../addons-available/server-tools/cron_run_manually/"
-# sudo su $OE_USER -c "ln -s ../addons-available/nicolas-petit/form_recette/clouder/"
-sudo su $OE_USER -c "ln -s ../addons-available/clouder-community/8.1/clouder/clouder*"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/nicolas-petit/web_create"
+sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available/nicolas-petit/web_create"
+sudo su $OE_USER -c "git clone --depth 1 --branch web_create --single-branch https://github.com/nicolas-petit/clouder.git"
+# sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/clouder-community/8.1"
+# sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available/clouder-community/8.1"
+# sudo su $OE_USER -c "git clone --depth 1 --branch 8.1 --single-branch https://github.com/clouder-community/clouder.git"
+sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-enabled"
+sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/disable_openerp_online/"
+sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/cron_run_manually/"
+sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/nicolas-petit/web_create/clouder/"
+# sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/clouder-community/8.1/clouder/clouder/"
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -254,9 +253,9 @@ sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/${OE_CONFIG}.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/${OE_CONFIG}.conf
 sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/${OE_CONFIG}.conf"
 if [  $IS_ENTERPRISE = "True" ]; then
-    sudo su root -c "echo 'addons_path=$OE_HOME/enterprise/addons,$OE_HOME/odoo_community/addons-enabled,$OE_HOME_EXT/addons' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "echo 'addons_path=$OE_HOME/enterprise/addons,$OE_HOME/odoo-addons-enabled,$OE_HOME_EXT/addons' >> /etc/${OE_CONFIG}.conf"
 else
-    sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/odoo_community/addons-enabled' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/odoo-addons-enabled' >> /etc/${OE_CONFIG}.conf"
 fi
 
 echo -e "* Change default xmlrpc port"
