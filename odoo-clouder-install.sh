@@ -1,7 +1,7 @@
 #!/bin/bash
 ################################################################################
 # Script for installing Odoo and Clouder on a clean Ubuntu 14.04 or 16.04 server
-# Authors: Amaury, Insaf, teoshore.com 2016, Gustavo Valverde, iterativo.do 2016
+# Authors: Amaury, Insaf, freeodoo.com 2016, Gustavo Valverde, iterativo.do 2016
 #-------------------------------------------------------------------------------
 # PREFERRED USE:
 # . odoo-clouder-install or source odoo-clouder-install
@@ -180,20 +180,21 @@ fi
 
 echo -e "\n---- Create community module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-{available,enabled}"
-sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available"
+cd $OE_HOME/odoo-addons-available
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/server-tools.git"
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/connector.git"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/nicolas-petit"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/nicolas-petit/web_create"
-sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available/nicolas-petit/web_create"
+cd $OE_HOME/odoo-addons-available/nicolas-petit/web_create
 sudo su $OE_USER -c "git clone --depth 1 --branch web_create --single-branch https://github.com/nicolas-petit/clouder.git"
 # sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/clouder-community/8.1"
-# sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-available/clouder-community/8.1"
+# cd $OE_HOME/odoo-addons-available/clouder-community/8.1
 # sudo su $OE_USER -c "git clone --depth 1 --branch 8.1 --single-branch https://github.com/clouder-community/clouder.git"
-sudo su $OE_USER -c "cd $OE_HOME/odoo-addons-enabled"
+cd $OE_HOME/odoo-addons-enabled
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/disable_openerp_online/"
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/cron_run_manually/"
-sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/nicolas-petit/web_create/clouder/"
-# sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/clouder-community/8.1/clouder/clouder/"
+#BUG## sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/nicolas-petit/web_create/clouder/"
+###### sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/clouder-community/8.1/clouder/clouder/"
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
