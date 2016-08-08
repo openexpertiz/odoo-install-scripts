@@ -193,8 +193,8 @@ sudo su $OE_USER -c "git clone --depth 1 --branch web_create --single-branch htt
 cd $OE_HOME/odoo-addons-enabled
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/disable_openerp_online/"
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/cron_run_manually/"
-#BUG## sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/nicolas-petit/web_create/clouder/"
-###### sudo su $OE_USER -c "ln -s clouder* ../odoo-addons-available/clouder-community/8.1/clouder/clouder/"
+#BUG## sudo su $OE_USER -c "ln -s ../odoo-addons-available/nicolas-petit/web_create/clouder/cloud*"
+###### sudo su $OE_USER -c "ln -s cloude* ../odoo-addons-available/clouder-community/8.1/clouder/cloud*"
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
