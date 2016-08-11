@@ -23,7 +23,6 @@ It also follows the approach recommended in Odoo's documentation (https://www.od
 
 3.  Modify this variables based on your needs
   ```bash
-    INSTALL_CLOUDER="True"
     INSTALL_WKHTMLTOPDF="True"
     HAVE_PROXY="False" 
     OE_PORT="8069"
