@@ -1,13 +1,14 @@
 #!/bin/bash
 ################################################################################
 # Script for installing Odoo and Clouder on a clean Ubuntu 14.04 or 16.04 server
+# /!\ BETA version, do NOT use in production!
 # Authors: Amaury, Insaf, freeodoo.com 2016, Gustavo Valverde, iterativo.do 2016
 #-------------------------------------------------------------------------------
 # PREFERRED USE:
-# . odoo-clouder-install or source odoo-clouder-install
+# . odoo-install-scripts or source odoo-install-scripts
 #
 # CAN WORK WITH (NOT RECOMMENDED AS VIRTUALENV MIGHT NOT WORK CORRECTLY):
-# ./odoo-clouder-install
+# ./odoo-install-scripts
 #
 ################################################################################
 #--------------------------------------------------
