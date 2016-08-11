@@ -1,5 +1,5 @@
-# odoo-clouder-install
-Automated install scripts for Odoo + Clouder. 
+# odoo-install-scripts
+Automated install scripts for Odoo + Clouder /!\ BETA version, do NOT use in production!
 This scripts just needs to be preconfigured before being launched, no interaction needed. 
 
 The script is based on the install scripts from André Schenkels (https://github.com/aschenkels-ictstudio/openerp-install-scripts), Yenthe (https://github.com/Yenthe666/InstallScript), Gustavo Valverde (https://github.com/gustavovalverde/odoo-install-scripts) with some additions from Nils Hamerlinck (http://nils.hamerlinck.fr/blog/2015/04/09/install-odoo-vps-ubuntu/)
@@ -32,10 +32,10 @@ It also follows the approach recommended in Odoo's documentation (https://www.od
 
 4.  Make the script executable
   ```bash
-  chmod +x odoo-clouder-install.sh
+  chmod +x odoo-install-scripts.sh
   ```
 
 5. Execute the script:
   ```bash
-  . odoo-clouder-install.sh
+  . odoo-install-scripts.sh
   ```
