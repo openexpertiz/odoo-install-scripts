@@ -25,7 +25,7 @@ echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale && \
 sudo dpkg-reconfigure --frontend=noninteractive locales && \
 sudo update-locale LANG=en_US.UTF-8
 #---------------------------------------------------
-# Timezone for Dominican Republic, change as needed
+# Timezone for Paris, change as needed
 #---------------------------------------------------
 echo -e "\n---- Setting Time Zone  ----"
 echo "Europe/Paris" > /etc/timezone && \
@@ -52,9 +52,6 @@ OE_USER="odoo"
 OE_HOME="/$OE_USER"
 OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
 OE_VIRTENV="venv"
-
-#Set it to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_CLOUDER="True"
 
 #Set it to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
@@ -183,18 +180,28 @@ sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-{available,enabled}"
 cd $OE_HOME/odoo-addons-available
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/server-tools.git"
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/connector.git"
+
+echo -e "\n---- Create nicolas-petit/web_create/clouder directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/nicolas-petit"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/nicolas-petit/web_create"
 cd $OE_HOME/odoo-addons-available/nicolas-petit/web_create
 sudo su $OE_USER -c "git clone --depth 1 --branch web_create --single-branch https://github.com/nicolas-petit/clouder.git"
-# sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/clouder-community/8.1"
-# cd $OE_HOME/odoo-addons-available/clouder-community/8.1
-# sudo su $OE_USER -c "git clone --depth 1 --branch 8.1 --single-branch https://github.com/clouder-community/clouder.git"
+
+echo -e "\n---- Create clouder-community/8.1/clouder directory ----"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/clouder-community"
+sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-available/clouder-community/8.1"
+cd $OE_HOME/odoo-addons-available/clouder-community/8.1
+sudo su $OE_USER -c "git clone --depth 1 --branch 8.1 --single-branch https://github.com/clouder-community/clouder.git"
+
+echo -e "\n---- Link the enabled addons among the available module directory ----"
 cd $OE_HOME/odoo-addons-enabled
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/disable_openerp_online/"
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/cron_run_manually/"
+## If we want to use nicolas-petit/web_create/clouder version, then uncomment it:
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/nicolas-petit/web_create/clouder/cloud* ."
-# sudo su $OE_USER -c "ln -s cloude* ../odoo-addons-available/clouder-community/8.1/clouder/cloud* ."
+## Else if we want to use clouder-community/8.1/clouder version, then uncomment it:
+#sudo su $OE_USER -c "ln -s cloude* ../odoo-addons-available/clouder-community/8.1/clouder/cloud* ."
+
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -231,7 +238,7 @@ echo "*                               *"
 echo "*********************************"
 sudo apt-get -y install libgeoip-dev libffi-dev libssl-dev geoip-database-contrib
 # Additional (kind of optional) dependencies
-$OE_HOME_EXT/$OE_VIRTENV/bin/pip install unicodecsv urllib3 GeoIP html5lib passlib pysftp
+sudo $OE_HOME_EXT/$OE_VIRTENV/bin/pip install unicodecsv urllib3 GeoIP html5lib passlib pysftp
 
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
@@ -256,7 +263,7 @@ sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/${O
 if [  $IS_ENTERPRISE = "True" ]; then
     sudo su root -c "echo 'addons_path=$OE_HOME/enterprise/addons,$OE_HOME/odoo-addons-enabled,$OE_HOME_EXT/addons' >> /etc/${OE_CONFIG}.conf"
 else
-    sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/odoo-addons-enabled' >> /etc/${OE_CONFIG}.conf"
+    sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/odoo-addons-enabled' >> /etc/${OE_CONFIG}.conf"
 fi
 
 echo -e "* Change default xmlrpc port"
