@@ -180,6 +180,8 @@ echo -e "\n---- Create community module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/odoo-addons-{available,enabled}"
 cd $OE_HOME/odoo-addons-available
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/server-tools.git"
+
+echo -e "\n---- Create connector module directory ----"
 sudo su $OE_USER -c "git clone --depth 1 --branch 8.0 --single-branch https://github.com/OCA/connector.git"
 
 echo -e "\n---- Create nicolas-petit/web_create/clouder directory ----"
@@ -198,6 +200,7 @@ echo -e "\n---- Link the enabled addons among the available module directory ---
 cd $OE_HOME/odoo-addons-enabled
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/disable_openerp_online/"
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/server-tools/cron_run_manually/"
+sudo su $OE_USER -c "ln -s ../odoo-addons-available/connector/connect* ."
 ## If we want to use nicolas-petit/web_create/clouder version, then uncomment it:
 sudo su $OE_USER -c "ln -s ../odoo-addons-available/nicolas-petit/web_create/clouder/cloud* ."
 ## Else if we want to use clouder-community/8.1/clouder version, then uncomment it:
